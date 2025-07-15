@@ -1,9 +1,16 @@
 package view;
 
+import controller.BookController;
+import controller.LogController;
+import controller.MemberController;
+
 import java.util.Scanner;
 
 public class LibraryView {
     private Scanner scan = new Scanner(System.in);
+    private BookController bController = BookController.getInstance();
+    private LogController lController = LogController.getInstance();
+    private MemberController mController = MemberController.getInstance();
 
     private LibraryView() {}
     private static final LibraryView instance = new LibraryView();
@@ -29,6 +36,10 @@ public class LibraryView {
     }
 
     public void signIn() {
+
+    }
+
+    public void userMenu() {
 
     }
 }
