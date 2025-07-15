@@ -4,6 +4,11 @@ public class BookDto {
     private int bno;
     private String btitle, bwriter;
 
+    public BookDto(String btitle, String bwriter) {
+        this.btitle = btitle;
+        this.bwriter = bwriter;
+    }
+
     public BookDto(int bno, String btitle, String bwriter) {
         this.bno = bno;
         this.btitle = btitle;
