@@ -4,6 +4,12 @@ public class LogDto {
     private int cno, mno, bno;
     private String borrowDate, returnDate;
 
+    public LogDto(int mno, int bno, String borrowDate) {
+        this.mno = mno;
+        this.bno = bno;
+        this.borrowDate = borrowDate;
+    }
+
     public LogDto(int cno, int mno, int bno, String borrowDate, String returnDate) {
         this.cno = cno;
         this.mno = mno;
