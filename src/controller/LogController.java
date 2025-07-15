@@ -45,12 +45,9 @@ public class LogController { // class start
 
     // 도서 반납 함수
     public boolean returnBook(int bno){
-        for (int i = 0; i < lDao.logDtos().size(); i++){
-            LogDto dto = lDao.logDtos().get(i);
-            if (dto.getBno() == bno){
-                return true;
-            }// if end
-        }// for end
+        if (logDtoReturn(bno).getBno() == bno){
+            return true;
+        }// if end
         return false;
     }// func end
 }// class end

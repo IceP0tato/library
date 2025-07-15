@@ -35,7 +35,7 @@ public class LogDao {// class start
     public boolean returnBook(int bno){
         boolean result = false;
         if (LogController.getInstance().returnBook(bno)){
-            LogController.getInstance().returnBook(bno)
+            LogController.getInstance().logDtoReturn(bno)
             result = true;
         }// if end
         return result;
