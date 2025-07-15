@@ -56,5 +56,17 @@ public class MemberController {
     public void signOut(){
         staticMno = 0;
     }
+
+    // 9. 로그인 유저 정보 조회
+    public MemberDto userCheck(){
+        MemberDto member = null;
+
+        for(int i = 0 ; i < memberList.size() ; i++ ){
+            if(memberList.get(i).getMno() == staticMno)
+                member = memberList.get(i);
+        }
+        return member;
+    }
+
 }
 
