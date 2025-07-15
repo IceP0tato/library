@@ -32,12 +32,11 @@ public class LogDao {// class start
     }// func end
 
     // 도서 반납함수
-    public boolean returnBook(int bno){
+    public boolean returnBook(LogDto dto){
         boolean result = false;
-        if (LogController.getInstance().returnBook(bno)){
-            LogController.getInstance().logDtoReturn(bno)
-            result = true;
-        }// if end
+        dto.setReturnDate(LogController.nowDate());
+        result = true;
+
         return result;
     }// func end
 }// class end
