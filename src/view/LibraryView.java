@@ -5,6 +5,7 @@ import controller.LogController;
 import controller.MemberController;
 import model.dto.BookDto;
 import model.dto.LogDto;
+import model.dto.MemberDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -61,12 +62,14 @@ public class LibraryView {
         int result = mController.signIn(mid, mpw);
 
         if (result == 0) {
-            System.out.println("[안내] " + /*[TODO].getMname() + */"님, 환영합니다.");
+            MemberDto member = mController.userCheck();
+            System.out.println("[안내] " + member.getMname() + "님, 환영합니다.");
             userMenu();
         } else if (result == 1) {
             System.out.println("[경고] 계정 정보가 일치하지 않습니다.");
         } else if (result == 2) {
-            System.out.println("[안내] " + /*[TODO].getMname() + */"님, 환영합니다.");
+            MemberDto member = mController.userCheck();
+            System.out.println("[안내] " + member.getMname() +"님, 환영합니다.");
             adminMenu();
         }
     }
@@ -157,7 +160,7 @@ public class LibraryView {
     }
 
     public void signOut() {
-        // TODO: staticMno를 0으로 초기화하는 코드 추가 필요
+        mController.signOut();
         System.out.println("[안내] 로그아웃 되었습니다.");
         System.out.println("(초기 메뉴 화면으로 돌아감)");
         index();
