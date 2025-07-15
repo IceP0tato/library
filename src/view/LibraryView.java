@@ -164,5 +164,7 @@ public class LibraryView {
         System.out.println("[안내] 로그아웃 되었습니다.");
         System.out.println("(초기 메뉴 화면으로 돌아감)");
         index();
+
+
     }
 }
