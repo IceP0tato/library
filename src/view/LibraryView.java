@@ -157,7 +157,7 @@ public class LibraryView {
     }
 
     public void signOut() {
-        // TODO: staticMno를 0으로 초기화하는 코드 추가 필요
+        mController.signOut();
         System.out.println("[안내] 로그아웃 되었습니다.");
         System.out.println("(초기 메뉴 화면으로 돌아감)");
         index();
