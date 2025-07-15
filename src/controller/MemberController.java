@@ -33,15 +33,14 @@ public class MemberController {
     // 2. 로그인 메소드
     public int signIn(String mid, String mpw){
         boolean signinResult = mDao.signIn(mid, mpw);
-        if(signinResult){ // 로그인 성공
 
-            // staticMno 설정
+        if(signinResult){ // 로그인 성공
+            // staticMno 저장
             for(int i = 0 ; i < memberList.size() ; i++ ){
                 if(memberList.get(i).equals("mid")){
                     staticMno = memberList.get(i).getMno();
                 }
             };
-
             // 로그인 결과 반환
             if( mid.equals("admin")){
                 return 2 ; // 관리자 로그인
@@ -60,7 +59,6 @@ public class MemberController {
     // 9. 로그인 유저 정보 조회
     public MemberDto userCheck(){
         MemberDto member = null;
-
         for(int i = 0 ; i < memberList.size() ; i++ ){
             if(memberList.get(i).getMno() == staticMno)
                 member = memberList.get(i);
