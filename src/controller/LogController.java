@@ -66,17 +66,16 @@ public class LogController { // class start
     // 도서 반납 함수
     public boolean returnBook(int bno){
         LogDto logDto = logDtoReturn(bno);
-
-            if (logDto.getBno() == bno){
-                for (int i = 0; i < lDao.logDtos().size(); i++){
-                    LogDto logDto1 = lDao.logDtos().get(i);
-                    if (logDto1.getMno() == MemberController.getInstance().userCheck().getMno()){
-                        if (logDto1.getReturnDate() == null){
-                            return LogDao.getInstance().returnBook(logDto1);
-                        }// if end
+        if (BookController.getInstance().getbook(bno)){
+            for (int i = 0; i < lDao.logDtos().size(); i++){
+                LogDto logDto1 = lDao.logDtos().get(i);
+                if (logDto1.getMno() == MemberController.getInstance().userCheck().getMno()){
+                    if (logDto1.getReturnDate() == null){
+                        return LogDao.getInstance().returnBook(logDto1);
                     }// if end
-                }// for end
-            }else { return false;}
+                }// if end
+            }// for end
+        }// if end
         return false;
     }// func end
 
