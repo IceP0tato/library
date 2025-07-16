@@ -2,6 +2,7 @@ package controller;
 
 import model.dao.LogDao;
 import model.dto.LogDto;
+import model.dto.MemberDto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,12 +38,13 @@ public class LogController { // class start
     public int borrowBook(int bno){
         LogDto logDto = logDtoReturn(bno);
         if (BookController.getInstance().getbook(bno).getBno() == bno){
-            if (LogDao.getInstance().borrowBook(logDto)){
+            if (logDto.getBno() != bno){
+                if (lDao.borrowBook(회원넘버, bno ,nowDate()))
                 return 0;
+            }else if (logDto.getBno() == bno) {
+                return 1;
             }// if end
-        } else if (logDto.getBno() == bno) {
-            return 1;
-        }// if end
+        } // if end
         return 2;
     }// func end
 

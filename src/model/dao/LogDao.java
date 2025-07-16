@@ -22,9 +22,9 @@ public class LogDao {// class start
     }// func end
 
     // 도서 대출 함수
-    public boolean borrowBook(LogDto logDto){
+    public boolean borrowBook(int mno , int bno ,String borrowDate){
         boolean result = false;
-        logDto.setBorrowDate(LogController.nowDate());
+        LogDto logDto = new LogDto(mno,bno,borrowDate);
         result = true;
         return result;
     }// func end
