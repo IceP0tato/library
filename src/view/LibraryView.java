@@ -81,6 +81,7 @@ public class LibraryView {
             System.out.println("================================================================");
             System.out.print("선택 > ");
             int num = scan.nextInt();
+            scan.nextLine();
 
             if (num == 1) borrowBook();
             else if (num == 2) returnBook();
@@ -98,6 +99,7 @@ public class LibraryView {
             System.out.println("================================================================");
             System.out.print("선택 > ");
             int num = scan.nextInt();
+            scan.nextLine();
 
             if (num == 1) addBook();
             else if (num == 2) borrowBook();
@@ -112,9 +114,9 @@ public class LibraryView {
     public void addBook() {
         System.out.println("--- 도서 등록 ---");
         System.out.print("도서명 : ");
-        String btitle = scan.next();
+        String btitle = scan.nextLine();
         System.out.print("저자 : ");
-        String bwriter = scan.next();
+        String bwriter = scan.nextLine();
 
         boolean result = bController.addBook(btitle, bwriter);
         if (result) System.out.println("[안내] '" + btitle + "' 도서 등록이 완료되었습니다.");
