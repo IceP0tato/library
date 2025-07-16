@@ -169,8 +169,12 @@ public class LibraryView {
         for (int i=0; i<logResult.size(); i++) {
             LogDto log = logResult.get(i);
             if (MemberController.staticMno == log.getMno()) {
-                BookDto book = bookResult.get(i);
-                System.out.printf("[%d] %s | %s | 대출일: %s 반납일 : %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate() ,log.getReturnDate());
+                for(int j = 0 ; j < bookResult.size() ; j++ ){
+                    if(bookResult.get(j).getBno() == log.getBno()) {
+                        BookDto book = bookResult.get(j);
+                        System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
+                    }
+                }
             }
         }
     }
