@@ -36,8 +36,10 @@ public class LogController { // class start
     // 도서 대출 함수
     public int borrowBook(int bno){
         LogDto logDto = logDtoReturn(bno);
-        if (bno유효성검사().bno == bno){
-            return 0;
+        if (BookController.getInstance().getbook(bno).getBno() == bno){
+            if (LogDao.getInstance().borrowBook(logDto)){
+                return 0;
+            }// if end
         } else if (logDto.getBno() == bno) {
             return 1;
         }// if end
