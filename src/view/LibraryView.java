@@ -45,7 +45,7 @@ public class LibraryView {
         System.out.print("연락처 : ");
         String mphone = scan.next();
 
-        int result = mController.signUp(mid, mpw, mname, mphone);
+        int result = mController.signUP(mid, mpw, mname, mphone);
         if (result == 0) System.out.println("[안내] 회원가입이 완료되었습니다.");
         else if (result == 1) System.out.println("[경고] 회원가입에 실패하였습니다.");
         else if (result == 2) System.out.println("[안내] 관리자 계정이 등록되었습니다.");
@@ -119,7 +119,7 @@ public class LibraryView {
         System.out.print("대출할 도서 번호 : ");
         int bno = scan.nextInt();
 
-        int result = bController.borrowBook(bno);
+        int result = lController.borrowBook(bno);
         if (result == 0) System.out.println("[안내] '" + /* [TODO].getBtitle() + */"' 도서 대출이 완료되었습니다.");
         else if (result == 1) System.out.println("[경고] 이미 대출중인 도서입니다.");
         else if (result == 2) System.out.println("[경고] 존재하지 않는 도서 번호입니다.");
@@ -130,14 +130,14 @@ public class LibraryView {
         System.out.print("반납할 도서 번호 : ");
         int bno = scan.nextInt();
 
-        boolean result = bController.returnBook(bno);
+        boolean result = lController.returnBook(bno);
         if (result) System.out.println("[안내] '" + /* [TODO].getBtitle() + */"' 도서 반납이 완료되었습니다.");
         else System.out.println("[경고] 대출중인 도서가 아닙니다.");
     };
 
     public void logCheck() {
         System.out.println("--- 나의 대출 현황 ---");
-        ArrayList<BookDto> bookResult = bController.logCheck();
+        ArrayList<BookDto> bookResult = bController.bookCheck();
         ArrayList<LogDto> logResult = lController.logCheck();
         for (int i=0; i<logResult.size(); i++) {
             // TODO: if -> staticMno와 log 순회 중 존재하는 mno가 같을 경우

@@ -25,6 +25,7 @@ public class LogDao {// class start
     public boolean borrowBook(int cno ,int mno , int bno ,String borrowDate){
         boolean result = false;
         LogDto logDto = new LogDto(cno,mno,bno,borrowDate);
+        logList.add(logDto);
         result = true;
         return result;
     }// func end
@@ -34,7 +35,6 @@ public class LogDao {// class start
         boolean result = false;
         logDto.setReturnDate(LogController.nowDate());
         result = true;
-
         return result;
     }// func end
 }// class end
