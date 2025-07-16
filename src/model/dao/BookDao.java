@@ -23,8 +23,8 @@ public class BookDao { // class start
     }// func end
 
     // 등록함수
-    public boolean addBook(String btitle , String bwriter){
-        BookDto bookDto = new BookDto(btitle,bwriter);
+    public boolean addBook(String btitle , String bwriter , int bno){
+        BookDto bookDto = new BookDto(bno,btitle,bwriter);
         bookList.add(bookDto);
         return true;
     }// func end
