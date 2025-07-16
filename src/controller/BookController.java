@@ -29,14 +29,14 @@ public class BookController { // class start
     }// func  end
 
     // 유효성 검사
-    public BookDto getbook(int bno){
+    public boolean getbook(int bno){
         for (int i = 0; i < bDao.bDtoReturn().size(); i++){
             BookDto bookDto = bDao.bDtoReturn().get(i);
             if (bookDto.getBno() == bno){
-                return bDao.bDtoReturn().get(i);
+                return true;
             }// if end
         }// for end
-        return null;
+        return false;
     }// func end
 
     public ArrayList<BookDto> bookCheck() {

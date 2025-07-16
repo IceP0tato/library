@@ -39,26 +39,27 @@ public class LogController { // class start
     // 도서 대출 함수
     public int borrowBook(int bno){
         LogDto logDto = logDtoReturn(bno);
+
         int cno = 0;
         if(lDao.logDtos().size() == 0){
             cno = 1;
         } else {
             cno = lDao.logDtos().get(lDao.logDtos().size()-1).getCno() + 1;
         }// if end
-
-            if (BookController.getInstance().getbook(bno).getBno() == bno){
-                if (logDto == null){
+        if (BookController.getInstance().getbook(bno)){
+            if (logDto == null){
+                if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
+                    return 0;
+                }// if end
+            }else if (logDto.getBno() == bno) {
+                if (logDto.getReturnDate() != null){
                     if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                         return 0;
                     }// if end
-                }else if (logDto.getBno() == bno) {
-                    if (logDto.getReturnDate() != null){
-                        if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
-                            return 0;
-                        }// if end
-                    }else { return 1; } // if end
-                }// if end
-            }else {return 2;}
+                }else { return 1; } // if end
+            }// if end
+        }else {return 2;}
+
         return 2;
     }// func end
 
