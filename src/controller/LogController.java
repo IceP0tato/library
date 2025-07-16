@@ -45,7 +45,7 @@ public class LogController { // class start
         } else {
             cno = lDao.logDtos().get(lDao.logDtos().size()-1).getCno() + 1;
         }// if end
-        if (logDto == null){ return 2;}
+
             if (BookController.getInstance().getbook(bno).getBno() == bno){
                 if (logDto == null){
                     if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
@@ -58,14 +58,14 @@ public class LogController { // class start
                         }// if end
                     }else { return 1; } // if end
                 }// if end
-            }// if end
+            }else {return 2;}
         return 2;
     }// func end
 
     // 도서 반납 함수
     public boolean returnBook(int bno){
         LogDto logDto = logDtoReturn(bno);
-        if (logDto == null){ return false;}
+
             if (logDto.getBno() == bno){
                 for (int i = 0; i < lDao.logDtos().size(); i++){
                     LogDto logDto1 = lDao.logDtos().get(i);
@@ -75,7 +75,7 @@ public class LogController { // class start
                         }// if end
                     }// if end
                 }// for end
-            }// if end
+            }else { return false;}
         return false;
     }// func end
 
