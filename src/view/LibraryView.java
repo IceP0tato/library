@@ -80,8 +80,8 @@ public class LibraryView {
 
         if (num == 1) borrowBook();
         else if (num == 2) returnBook();
-      //  else if (num == 3) logCheck();
-      //  else if (num == 4) bookCheck();
+        else if (num == 3) logCheck();
+        else if (num == 4) bookCheck();
         else if (num == 5) signOut();
         else System.out.println("[경고] 해당 메뉴는 관리자만 접근 가능합니다.");
     }
@@ -96,8 +96,8 @@ public class LibraryView {
         if (num == 1) addBook();
         else if (num == 2) borrowBook();
         else if (num == 3) returnBook();
-     //   else if (num == 4) logCheck();
-      //  else if (num == 5) bookCheck();
+        else if (num == 4) logCheck();
+        else if (num == 5) bookCheck();
         else if (num == 6) signOut();
         else System.out.println("[경고] 존재하지 않는 메뉴입니다.");
     }
@@ -135,26 +135,26 @@ public class LibraryView {
         else System.out.println("[경고] 대출중인 도서가 아닙니다.");
     };
 
-    //public void logCheck() {
-    //    System.out.println("--- 나의 대출 현황 ---");
-    //    ArrayList<BookDto> bookResult = bController.bookCheck();
-    //    ArrayList<LogDto> logResult = lController.logCheck();
-    //    for (int i=0; i<logResult.size(); i++) {
-    //        // TODO: if -> staticMno와 log 순회 중 존재하는 mno가 같을 경우
-    //        BookDto book = bookResult.get(i);
-    //        LogDto log = logResult.get(i);
-    //        System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
-    //    }
-    //}
-    //
-    //public void bookCheck() {
-    //    System.out.println("--- 도서 목록 ---");
-    //    ArrayList<BookDto> bookResult = bController.bookCheck();
-    //    for (int i=0; i<bookResult.size(); i++) {
-    //        BookDto book = bookResult.get(i);
-    //        System.out.printf("[%d] %s | %s\n", book.getBno(), book.getBtitle(), book.getBwriter());
-    //    }
-    //}
+    public void logCheck() {
+        System.out.println("--- 나의 대출 현황 ---");
+        ArrayList<BookDto> bookResult = bController.bookCheck();
+        ArrayList<LogDto> logResult = lController.logCheck();
+        for (int i=0; i<logResult.size(); i++) {
+            // TODO: if -> staticMno와 log 순회 중 존재하는 mno가 같을 경우
+            BookDto book = bookResult.get(i);
+            LogDto log = logResult.get(i);
+            System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
+        }
+    }
+
+    public void bookCheck() {
+        System.out.println("--- 도서 목록 ---");
+        ArrayList<BookDto> bookResult = bController.bookCheck();
+        for (int i=0; i<bookResult.size(); i++) {
+            BookDto book = bookResult.get(i);
+            System.out.printf("[%d] %s | %s\n", book.getBno(), book.getBtitle(), book.getBwriter());
+        }
+    }
 
     public void signOut() {
         mController.signOut();
