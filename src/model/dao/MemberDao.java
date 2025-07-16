@@ -14,7 +14,7 @@ public class MemberDao {
     }
 
     // 회원가입 메소드
-    public boolean signUP(String mid , String mpw , String mname , String mphone){
+    public boolean signUp(String mid , String mpw , String mname , String mphone){
         boolean result = false;
 
         int mno = 0;

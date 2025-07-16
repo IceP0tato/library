@@ -18,8 +18,8 @@ public class MemberController {
 
 
     // 1. 회원가입 메소드
-    public int signUP(String mid, String mpw, String mname, String mphone) {
-        boolean memberResult = mDao.signUP(mid, mpw, mname, mphone);
+    public int signUp(String mid, String mpw, String mname, String mphone) {
+        boolean memberResult = mDao.signUp(mid, mpw, mname, mphone);
         if (memberResult) { // 회원가입 성공
             if (mname.equals("admin")) {
                 return 2; // 관리자 회원가입
