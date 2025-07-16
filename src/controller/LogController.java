@@ -39,15 +39,21 @@ public class LogController { // class start
     // 도서 대출 함수
     public int borrowBook(int bno){
         LogDto logDto = logDtoReturn(bno);
-        int lastcno = lDao.logDtos().get(lDao.logDtos().size()-1).getCno();
+        int cno = 0;
+        if(lDao.logDtos().size() == 0){
+            cno = 1;
+        } else {
+            cno = lDao.logDtos().get(lDao.logDtos().size()-1).getCno() + 1;
+        }// if end
+
         if (BookController.getInstance().getbook(bno).getBno() == bno){
             if (logDto.getBno() != bno){
-                if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
+                if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                     return 0;
                 }// if end
             }else if (logDto.getBno() == bno) {
                 if (logDto.getReturnDate() != null){
-                    if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
+                    if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                         return 0;
                     }// if end
                 }else { return 1; } // if end
@@ -60,12 +66,11 @@ public class LogController { // class start
     public boolean returnBook(int bno){
         LogDto logDto = logDtoReturn(bno);
         if (logDto.getBno() == bno){
-            logDto.getCno();
             for (int i = 0; i < lDao.logDtos().size(); i++){
                 LogDto logDto1 = lDao.logDtos().get(i);
                 if (logDto1.getMno() == MemberController.getInstance().userCheck().getMno()){
                     if (logDto1.getReturnDate() == null){
-                        return LogDao.getInstance().returnBook(logDto);
+                        return LogDao.getInstance().returnBook(logDto1);
                     }// if end
                 }// if end
             }// for end
