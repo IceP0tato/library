@@ -172,7 +172,7 @@ public class LibraryView {
                 for(int j = 0 ; j < bookResult.size() ; j++ ){
                     if(bookResult.get(j).getBno() == log.getBno()) {
                         BookDto book = bookResult.get(j);
-                        System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
+                        System.out.printf("[%d] %s | %s | 대출일: %s 반납일 : %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate(),log.getReturnDate());
                     }
                 }
             }
