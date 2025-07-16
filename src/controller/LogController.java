@@ -1,6 +1,7 @@
 package controller;
 
 import model.dao.LogDao;
+import model.dao.MemberDao;
 import model.dto.LogDto;
 import model.dto.MemberDto;
 
@@ -39,10 +40,15 @@ public class LogController { // class start
         LogDto logDto = logDtoReturn(bno);
         if (BookController.getInstance().getbook(bno).getBno() == bno){
             if (logDto.getBno() != bno){
-                if (lDao.borrowBook(회원넘버, bno ,nowDate()))
-                return 0;
+                if (lDao.borrowBook(MemberController.getInstance().userCheck().getmno, bno ,nowDate())){
+                    return 0;
+                }// if end
             }else if (logDto.getBno() == bno) {
-                return 1;
+                if (logDto.getReturnDate() != null){
+                    if (lDao.borrowBook(MemberController.getInstance().userCheck().getmno, bno ,nowDate())){
+                        return 0;
+                    }// if end
+                }else { return 1; } // if end
             }// if end
         } // if end
         return 2;
