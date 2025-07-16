@@ -18,7 +18,13 @@ public class BookController { // class start
     // 북 등록 함수
     public boolean addBook(String btitle , String bwriter ){
         boolean result = false;
-        result =  bDao.addBook(btitle,bwriter);
+        int bno = 0;
+        if(bDao.bDtoReturn().size() == 0){
+            bno = 1;
+        } else {
+            bno = bDao.bDtoReturn().get(bDao.bDtoReturn().size()-1).getBno() + 1;
+        }// if end
+        result =  bDao.addBook(btitle,bwriter,bno);
         return result;
     }// func  end
 

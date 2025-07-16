@@ -47,7 +47,7 @@ public class LogController { // class start
         }// if end
 
         if (BookController.getInstance().getbook(bno).getBno() == bno){
-            if (logDto.getBno() != bno){
+            if (logDto == null){
                 if (lDao.borrowBook(cno,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                     return 0;
                 }// if end
