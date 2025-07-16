@@ -192,6 +192,6 @@ public class LibraryView {
         mController.signOut();
         System.out.println("[안내] 로그아웃 되었습니다.");
         System.out.println("(초기 메뉴 화면으로 돌아감)");
-        index();
+        index(); // return으로 처리할 것 (이 코드는 함수 중첩 실행이 됨 - 메모리 문제)
     }
 }
