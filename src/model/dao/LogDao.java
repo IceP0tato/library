@@ -22,19 +22,17 @@ public class LogDao {// class start
     }// func end
 
     // 도서 대출 함수
-    public boolean borrowBook(int bno){
+    public boolean borrowBook(LogDto logDto){
         boolean result = false;
-        if (LogController.getInstance().borrowBook(bno) == 0){
-            LogDto logDto = new LogDto(mno ,bno ,LogController.nowDate());
-            result = true;
-        }// if end
+        logDto.setBorrowDate(LogController.nowDate());
+        result = true;
         return result;
     }// func end
 
     // 도서 반납함수
-    public boolean returnBook(LogDto dto){
+    public boolean returnBook(LogDto logDto){
         boolean result = false;
-        dto.setReturnDate(LogController.nowDate());
+        logDto.setReturnDate(LogController.nowDate());
         result = true;
 
         return result;

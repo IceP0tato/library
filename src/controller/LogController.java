@@ -35,9 +35,10 @@ public class LogController { // class start
 
     // 도서 대출 함수
     public int borrowBook(int bno){
+        LogDto logDto = logDtoReturn(bno);
         if (bno유효성검사().bno == bno){
             return 0;
-        } else if (logDtoReturn(bno).getBno() == bno) {
+        } else if (logDto.getBno() == bno) {
             return 1;
         }// if end
         return 2;
@@ -45,8 +46,9 @@ public class LogController { // class start
 
     // 도서 반납 함수
     public boolean returnBook(int bno){
-        if (logDtoReturn(bno).getBno() == bno){
-            return true;
+        LogDto logDto = logDtoReturn(bno);
+        if (logDto.getBno() == bno){
+            return LogDao.getInstance().returnBook(logDto);
         }// if end
         return false;
     }// func end
