@@ -7,6 +7,7 @@ import model.dto.MemberDto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class LogController { // class start
     // dao 가져오기
@@ -41,12 +42,12 @@ public class LogController { // class start
         int lastcno = lDao.logDtos().get(lDao.logDtos().size()-1).getCno();
         if (BookController.getInstance().getbook(bno).getBno() == bno){
             if (logDto.getBno() != bno){
-                if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getmno, bno ,nowDate())){
+                if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                     return 0;
                 }// if end
             }else if (logDto.getBno() == bno) {
                 if (logDto.getReturnDate() != null){
-                    if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getmno, bno ,nowDate())){
+                    if (lDao.borrowBook(lastcno++,MemberController.getInstance().userCheck().getMno(), bno ,nowDate())){
                         return 0;
                     }// if end
                 }else { return 1; } // if end
@@ -62,7 +63,7 @@ public class LogController { // class start
             logDto.getCno();
             for (int i = 0; i < lDao.logDtos().size(); i++){
                 LogDto logDto1 = lDao.logDtos().get(i);
-                if (logDto1.getMno() == MemberController.getInstance().userCheck().getmno){
+                if (logDto1.getMno() == MemberController.getInstance().userCheck().getMno()){
                     if (logDto1.getReturnDate() == null){
                         return LogDao.getInstance().returnBook(logDto);
                     }// if end
@@ -71,4 +72,8 @@ public class LogController { // class start
         }// if end
         return false;
     }// func end
+
+    public ArrayList<LogDto> logCheck() {
+        return lDao.logDtos();
+    }
 }// class end
