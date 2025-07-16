@@ -75,34 +75,38 @@ public class LibraryView {
     }
 
     public void userMenu() {
-        System.out.println("=========== 도서관리 시스템 ===========");
-        System.out.println("  1.도서대출 | 2.도서반납 | 3.내대출현황 | 4.도서목록 | 5.로그아웃");
-        System.out.println("================================================================");
-        System.out.print("선택 > ");
-        int num = scan.nextInt();
+        for (;;) {
+            System.out.println("=========== 도서관리 시스템 ===========");
+            System.out.println("  1.도서대출 | 2.도서반납 | 3.내대출현황 | 4.도서목록 | 5.로그아웃");
+            System.out.println("================================================================");
+            System.out.print("선택 > ");
+            int num = scan.nextInt();
 
-        if (num == 1) borrowBook();
-        else if (num == 2) returnBook();
-        else if (num == 3) logCheck();
-        else if (num == 4) bookCheck();
-        else if (num == 5) signOut();
-        else System.out.println("[경고] 해당 메뉴는 관리자만 접근 가능합니다.");
+            if (num == 1) borrowBook();
+            else if (num == 2) returnBook();
+            else if (num == 3) logCheck();
+            else if (num == 4) bookCheck();
+            else if (num == 5) signOut();
+            else System.out.println("[경고] 해당 메뉴는 관리자만 접근 가능합니다.");
+        }
     }
 
     public void adminMenu() {
-        System.out.println("=========== 도서관리 시스템 ===========");
-        System.out.println("  1.도서등록 | 2.도서대출 | 3.도서반납 | 4.내대출현황 | 5.도서목록 | 6.로그아웃");
-        System.out.println("================================================================");
-        System.out.print("선택 > ");
-        int num = scan.nextInt();
+        for (;;) {
+            System.out.println("=========== 도서관리 시스템 ===========");
+            System.out.println("  1.도서등록 | 2.도서대출 | 3.도서반납 | 4.내대출현황 | 5.도서목록 | 6.로그아웃");
+            System.out.println("================================================================");
+            System.out.print("선택 > ");
+            int num = scan.nextInt();
 
-        if (num == 1) addBook();
-        else if (num == 2) borrowBook();
-        else if (num == 3) returnBook();
-        else if (num == 4) logCheck();
-        else if (num == 5) bookCheck();
-        else if (num == 6) signOut();
-        else System.out.println("[경고] 존재하지 않는 메뉴입니다.");
+            if (num == 1) addBook();
+            else if (num == 2) borrowBook();
+            else if (num == 3) returnBook();
+            else if (num == 4) logCheck();
+            else if (num == 5) bookCheck();
+            else if (num == 6) signOut();
+            else System.out.println("[경고] 존재하지 않는 메뉴입니다.");
+        }
     }
 
     public void addBook() {
@@ -113,7 +117,7 @@ public class LibraryView {
         String bwriter = scan.next();
 
         boolean result = bController.addBook(btitle, bwriter);
-        if (result) System.out.println("[안내] '" + /* [TODO].getBtitle() + */"' 도서 등록이 완료되었습니다.");
+        if (result) System.out.println("[안내] '" + btitle + "' 도서 등록이 완료되었습니다.");
         else System.out.println("[경고] 도서 등록에 실패하였습니다.");
     }
 
@@ -122,8 +126,17 @@ public class LibraryView {
         System.out.print("대출할 도서 번호 : ");
         int bno = scan.nextInt();
 
-        int result = bController.borrowBook(bno);
-        if (result == 0) System.out.println("[안내] '" + /* [TODO].getBtitle() + */"' 도서 대출이 완료되었습니다.");
+        int result = lController.borrowBook(bno);
+        ArrayList<BookDto> bookResult = bController.bookCheck();
+
+        if (result == 0) {
+            for (BookDto book : bookResult) {
+                if (bno == book.getBno()) {
+                    System.out.println("[안내] '" + book.getBtitle() + "' 도서 대출이 완료되었습니다.");
+                    break;
+                }
+            }
+        }
         else if (result == 1) System.out.println("[경고] 이미 대출중인 도서입니다.");
         else if (result == 2) System.out.println("[경고] 존재하지 않는 도서 번호입니다.");
     }
@@ -133,20 +146,30 @@ public class LibraryView {
         System.out.print("반납할 도서 번호 : ");
         int bno = scan.nextInt();
 
-        boolean result = bController.returnBook(bno);
-        if (result) System.out.println("[안내] '" + /* [TODO].getBtitle() + */"' 도서 반납이 완료되었습니다.");
+        boolean result = lController.returnBook(bno);
+        ArrayList<BookDto> bookResult = bController.bookCheck();
+
+        if (result) {
+            for (BookDto book : bookResult) {
+                if (bno == book.getBno()) {
+                    System.out.println("[안내] '" + book.getBtitle() + "' 도서 반납이 완료되었습니다.");
+                    break;
+                }
+            }
+        }
         else System.out.println("[경고] 대출중인 도서가 아닙니다.");
     };
 
     public void logCheck() {
         System.out.println("--- 나의 대출 현황 ---");
-        ArrayList<BookDto> bookResult = bController.logCheck();
+        ArrayList<BookDto> bookResult = bController.bookCheck();
         ArrayList<LogDto> logResult = lController.logCheck();
         for (int i=0; i<logResult.size(); i++) {
-            // TODO: if -> staticMno와 log 순회 중 존재하는 mno가 같을 경우
-            BookDto book = bookResult.get(i);
             LogDto log = logResult.get(i);
-            System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
+            if (MemberController.staticMno == log.getMno()) {
+                BookDto book = bookResult.get(i);
+                System.out.printf("[%d] %s | %s | 대출일: %s\n", log.getCno(), book.getBtitle(), book.getBwriter(), log.getBorrowDate());
+            }
         }
     }
 
@@ -164,7 +187,5 @@ public class LibraryView {
         System.out.println("[안내] 로그아웃 되었습니다.");
         System.out.println("(초기 메뉴 화면으로 돌아감)");
         index();
-
-
     }
 }

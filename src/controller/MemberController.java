@@ -37,7 +37,7 @@ public class MemberController {
         if(signinResult){ // 로그인 성공
             // staticMno 저장
             for(int i = 0 ; i < memberList.size() ; i++ ){
-                if(memberList.get(i).equals("mid")){
+                if(memberList.get(i).getMid().equals(mid)){
                     staticMno = memberList.get(i).getMno();
                 }
             };

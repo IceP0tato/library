@@ -3,6 +3,8 @@ package controller; // 패키지명
 import model.dao.BookDao;
 import model.dto.BookDto;
 
+import java.util.ArrayList;
+
 public class BookController { // class start
     // dao가져오기
     private BookDao bDao = BookDao.getInstance();
@@ -30,4 +32,8 @@ public class BookController { // class start
         }// for end
         return null;
     }// func end
+
+    public ArrayList<BookDto> bookCheck() {
+        return bDao.bDtoReturn();
+    }
 }// class end

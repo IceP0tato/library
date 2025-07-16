@@ -33,7 +33,7 @@ public class MemberDao {
     // 로그인 메소드
     public boolean signIn(String mid, String mpw){
         for(int i = 0 ; i < memberList.size() ; i++){
-            if ( memberList.get(i).getMid().equals(mid) && memberList.get(i).equals(mpw)){
+            if ( memberList.get(i).getMid().equals(mid) && memberList.get(i).getMpw().equals(mpw)){
                 return true;
             }
         }
